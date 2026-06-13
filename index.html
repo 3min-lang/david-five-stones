@@ -7,7 +7,7 @@
 <style>
   :root{
     --bg:#0f1b2d; --panel:#16263d; --ink:#f4f7fb; --muted:#9fb3cc;
-    --c-pray:#e5484d; --c-bible:#f5a623; --c-worship:#30a46c; --c-fellow:#3b82f6; --c-spirit:#ffffff;
+    --c-pray:#e5484d; --c-bible:#f5a623; --c-worship:#30a46c; --c-fellow:#3b82f6; --c-spirit:#f4eedc;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0;height:100%;}
@@ -48,12 +48,12 @@
   .card.bible{background:linear-gradient(135deg,#f5a623,#c47b00);}
   .card.worship{background:linear-gradient(135deg,#30a46c,#1d6b46);}
   .card.fellow{background:linear-gradient(135deg,#3b82f6,#1d4ed8);}
-  .card.spirit{background:#ffffff;color:#1f2d44;grid-column:1/-1;min-height:130px;border:1px solid #e2e6ee;}
+  .card.spirit{background:#f4eedc;color:#1f2d44;grid-column:1/-1;min-height:130px;border:1px solid #e6dcc0;}
   .card.spirit .en{opacity:.65;}
   .card.spirit .go{opacity:.7;}
   .card.spirit .stone{opacity:.10;}
   .card.spirit .badge{position:absolute;left:28px;bottom:26px;font-size:13px;
-        background:#eef1f6;color:#42506a;padding:4px 12px;border-radius:999px;}
+        background:#ebe3cf;color:#5a5238;padding:4px 12px;border-radius:999px;}
 
   .cat-title{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
   .dot{width:22px;height:22px;border-radius:50%;}
@@ -176,7 +176,7 @@
 
 <script>
 /* ---------- DATA ---------- */
-const HEX = ["#e5484d","#f5a623","#30a46c","#3b82f6","#ffffff"];
+const HEX = ["#e5484d","#f5a623","#30a46c","#3b82f6","#f4eedc"];
 
 const DATA = [
  { /* 0 禱告 */
@@ -285,7 +285,7 @@ const DATA = [
    ]
  },
  { /* 4 聖靈的引導 ─ 只有問題 */
-   name:"聖靈的引導", color:"#ffffff", light:true, noTask:true,
+   name:"聖靈的引導", color:"#f4eedc", light:true, noTask:true,
    tasks:[],
    questions:[
      {q:"聖靈像什麼鳥降在耶穌身上？", a:"鴿子"},
