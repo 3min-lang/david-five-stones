@@ -7,7 +7,7 @@
 <style>
   :root{
     --bg:#0f1b2d; --panel:#16263d; --ink:#f4f7fb; --muted:#9fb3cc;
-    --c-pray:#e5484d; --c-bible:#f5a623; --c-worship:#30a46c; --c-fellow:#3b82f6; --c-spirit:#8b5cf6;
+    --c-pray:#e5484d; --c-bible:#f5a623; --c-worship:#30a46c; --c-fellow:#3b82f6; --c-spirit:#ffffff;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0;height:100%;}
@@ -48,9 +48,12 @@
   .card.bible{background:linear-gradient(135deg,#f5a623,#c47b00);}
   .card.worship{background:linear-gradient(135deg,#30a46c,#1d6b46);}
   .card.fellow{background:linear-gradient(135deg,#3b82f6,#1d4ed8);}
-  .card.spirit{background:linear-gradient(135deg,#8b5cf6,#5b21b6);grid-column:1/-1;min-height:130px;}
-  .card.spirit .badge{position:absolute;left:28px;bottom:26px;font-size:13px;opacity:.85;
-        background:rgba(255,255,255,.16);padding:4px 12px;border-radius:999px;}
+  .card.spirit{background:#ffffff;color:#1f2d44;grid-column:1/-1;min-height:130px;border:1px solid #e2e6ee;}
+  .card.spirit .en{opacity:.65;}
+  .card.spirit .go{opacity:.7;}
+  .card.spirit .stone{opacity:.10;}
+  .card.spirit .badge{position:absolute;left:28px;bottom:26px;font-size:13px;
+        background:#eef1f6;color:#42506a;padding:4px 12px;border-radius:999px;}
 
   .cat-title{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
   .dot{width:22px;height:22px;border-radius:50%;}
@@ -73,7 +76,8 @@
        display:flex;align-items:center;justify-content:center;position:relative;
        box-shadow:0 8px 20px rgba(0,0,0,.3);transition:.15s;}
   .num:hover{transform:translateY(-3px);filter:brightness(1.1);}
-  .num.used{background:#33445c !important;color:#7e94ad !important;box-shadow:none;}
+  .num.light{color:#1f2d44;border:2px solid #d4dbe6;box-shadow:0 8px 20px rgba(0,0,0,.18);}
+  .num.used{background:#33445c !important;color:#7e94ad !important;border-color:#33445c !important;box-shadow:none;}
   .num.used::after{content:"已選";position:absolute;bottom:8px;font-size:13px;font-weight:700;letter-spacing:1px;}
   .num .check{position:absolute;top:6px;right:10px;font-size:18px;display:none;}
   .num.used .check{display:block;color:#5ad18f;}
@@ -89,6 +93,8 @@
   .modal .tag{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:16px;}
   .modal .tag .mdot{width:16px;height:16px;border-radius:50%;}
   .modal .qno{background:var(--accent);color:#fff;border-radius:12px;padding:4px 14px;font-weight:900;font-size:20px;}
+  .modal.light .qno{color:#1f2d44;}
+  .modal.light .mdot{box-shadow:0 0 0 2px #44557a;}
   .modal .body{padding:8px 26px 10px;}
   .modal h3{font-size:clamp(20px,3.4vw,26px);line-height:1.5;margin:14px 0 12px;}
   .recite{background:#0f2036;border:1px solid #2b466a;border-radius:14px;
@@ -170,7 +176,7 @@
 
 <script>
 /* ---------- DATA ---------- */
-const HEX = ["#e5484d","#f5a623","#30a46c","#3b82f6","#8b5cf6"];
+const HEX = ["#e5484d","#f5a623","#30a46c","#3b82f6","#ffffff"];
 
 const DATA = [
  { /* 0 禱告 */
@@ -279,7 +285,7 @@ const DATA = [
    ]
  },
  { /* 4 聖靈的引導 ─ 只有問題 */
-   name:"聖靈的引導", color:"#8b5cf6", noTask:true,
+   name:"聖靈的引導", color:"#ffffff", light:true, noTask:true,
    tasks:[],
    questions:[
      {q:"聖靈像什麼鳥降在耶穌身上？", a:"鴿子"},
@@ -337,6 +343,7 @@ function openGrid(type){
   for(let i=0;i<count;i++){
     const b=document.createElement('button');
     b.className='num'; b.style.background=d.color;
+    if(d.light) b.classList.add('light');
     b.innerHTML='<span class="check">✓</span>'+(i+1);
     if(visited[vkey(curCat,type,i)]) b.classList.add('used');
     b.onclick=()=>openItem(i,b);
@@ -363,6 +370,7 @@ function openItem(i,btn){
   if(btn) btn.classList.add('used');
 
   document.documentElement.style.setProperty('--accent',d.color);
+  document.getElementById('modal').classList.toggle('light', !!d.light);
   document.getElementById('m-dot').style.background=d.color;
   document.getElementById('m-tag').textContent = d.name + (curType==='task'?' · 任務':' · 問題');
   document.getElementById('m-no').textContent = (i+1);
